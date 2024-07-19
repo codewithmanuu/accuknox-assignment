@@ -30,10 +30,26 @@ SocialMedia-App is a application designed for social interaction and networking.
    ```bash
    sudo docker-compose up --build
 
+   ```windows
+   docker-compose up --build
+
+3. **Make migrations and migrate**
+
+   ```bash
+   - sudo docker-compose exec django python manage.py makemigratios SocialMediaApp
+   - sudo docker-compose exec django python manage.py migrate
+
+   ```windows
+   - docker-compose exec django python manage.py makemigratios SocialMediaApp
+   - docker-compose exec django python manage.py migrate
+
 3. **Create a superuser for accessing the Django admin panel:**
 
    ```bash
    sudo docker-compose exec django python manage.py createsuperuser
+
+   ```windows
+   docker-compose exec django python manage.py createsuperuser
 
 
 ## Usage
@@ -51,11 +67,16 @@ SocialMedia-App is a application designed for social interaction and networking.
    ```bash
    sudo docker-compose down
 
+   ```windows
+   docker-compose down
+
 2. **Use the following command to rebuild images and start services:**
 
    ```bash
    sudo docker-compose up --build
 
+   ```windows
+   docker-compose up --build
 
 ## Contact
 

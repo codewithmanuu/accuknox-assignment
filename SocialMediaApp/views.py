@@ -22,6 +22,8 @@ from .serializers import (
 
 # Create your views here.
 
+"""  Handles the creation of User and associated Useraccount objects during the registration process.  """
+
 
 class APIRegistrationView(GenericAPIView):
     allowed_methods = ["POST"]
@@ -41,6 +43,9 @@ class APIRegistrationView(GenericAPIView):
             )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+"""  Authenticates the user and manages the login process, including token creation and user validation. """
 
 
 class APILoginView(GenericAPIView):
@@ -77,6 +82,9 @@ class APILoginView(GenericAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+"""  Handels the user search functionality. """
+
+
 class SearchUsers(ListAPIView):
     allowed_methods = ["GET"]
     permission_classes = [IsAuthenticated]
@@ -102,6 +110,9 @@ class SearchUsers(ListAPIView):
         return queryset
 
 
+"""  The view is responsible for Handling the friend requests listing functionality. """
+
+
 class ListRequests(ListAPIView):
     allowed_methods = ["GET"]
     permission_classes = [IsAuthenticated]
@@ -116,6 +127,9 @@ class ListRequests(ListAPIView):
         return queryset
 
 
+"""  The view is responsible for Handling the friends listing functionality. """
+
+
 class ListFriends(ListAPIView):
     allowed_methods = ["GET"]
     permission_classes = [IsAuthenticated]
@@ -128,6 +142,9 @@ class ListFriends(ListAPIView):
             user=self.request.user
         )
         return queryset.friends.all()
+
+
+"""  The view is responsible for Handling the friends request accept and reject functionality. """
 
 
 class AcceptRejectView(GenericAPIView):
@@ -164,6 +181,9 @@ class AcceptRejectView(GenericAPIView):
             return Response({"error": "Oops....! Something Went Wrong"}, status=404)
 
 
+"""  The view is responsible for Handling the friends request sending functionality. """
+
+
 class SendRequestView(GenericAPIView):
     allowed_methods = ["GET", "POST", "DELETE"]
     throttle_classes = [CustomUserRateThrottle]
@@ -183,6 +203,11 @@ class SendRequestView(GenericAPIView):
             )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+"""
+Handles the user logout process by deleting the user token.
+"""
 
 
 class APILogOutView(GenericAPIView):
