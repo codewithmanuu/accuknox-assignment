@@ -56,10 +56,11 @@ class APILoginView(GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            user = User.objects.filter(
-                email=serializer.validated_data.get("email")
-            ).first()
-            if user:
+            try:
+                user = User.objects.get(
+                    email=serializer.validated_data.get("email")
+                )
+
                 username = str(user.username)
                 password = serializer.validated_data.get("password")
                 is_authenticated = authenticate(
@@ -67,13 +68,13 @@ class APILoginView(GenericAPIView):
                 )
                 if is_authenticated:
                     token, created = Token.objects.get_or_create(user=user)
-                    return Response({"token": token.key}, status=status.HTTP_200_OK)
+                    return Response({"Success":"Successfully loggedin",'token': token.key}, status=status.HTTP_200_OK)
                 else:
                     return Response(
                         {"error": "Incorrect Email or Password"},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
-            else:
+            except User.DoesNotExist:
                 return Response(
                     {"error": "Incorrect Email or Password"},
                     status=status.HTTP_400_BAD_REQUEST,

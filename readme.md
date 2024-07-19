@@ -57,6 +57,10 @@ SocialMedia-App is a application designed for social interaction and networking.
 - Import the provided collections into any API client of your choice. 
 - Access the application at http://localhost:8000/api/v1/
 - Access the Django admin panel at http://localhost:8000/admin/
+- Utilize the API client to send a POST request to the user registration endpoint to sign up a new user.
+- Use the API client to send a POST request to the login endpoint to authenticate the user and retrieve the authorization token.
+- Include the obtained authorization token in the request headers for subsequent API requests.
+
 
 ## Development
  
